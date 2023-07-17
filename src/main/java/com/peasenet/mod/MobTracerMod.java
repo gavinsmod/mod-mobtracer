@@ -14,7 +14,6 @@ public class MobTracerMod implements ModInitializer {
      */
     @Override
     public void onInitialize() {
-        LOGGER.info("Hello Fabric world!");
         GavinsMod.addMod(new ModMobTracer());
     }
 }

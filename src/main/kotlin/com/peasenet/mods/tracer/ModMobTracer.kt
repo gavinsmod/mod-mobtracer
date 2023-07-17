@@ -19,11 +19,12 @@
  */
 package com.peasenet.mods.tracer
 
-import com.peasenet.gui.mod.tracer.GuiTracer
+import com.peasenet.gui.mod.tracer.GuiMobTracer
 import com.peasenet.settings.SettingBuilder
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.BlockEntityRender
 import com.peasenet.util.event.data.EntityRender
+import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.mob.MobEntity
 
 /**
@@ -41,7 +42,7 @@ class ModMobTracer : TracerMod(
 //        menu.setCallback { client.setScreen(GuiTracer()) }
         val menu = SettingBuilder()
             .setTitle("gavinsmod.settings.mobtracer")
-            .setCallback { client.setScreen(GuiTracer()) }
+            .setCallback { MinecraftClient.getInstance().setScreen(GuiMobTracer()) }
             .buildClickSetting()
         addSetting(menu)
     }
