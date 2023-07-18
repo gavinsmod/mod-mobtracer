@@ -24,6 +24,8 @@ import com.peasenet.settings.SettingBuilder
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.BlockEntityRender
 import com.peasenet.util.event.data.EntityRender
+import com.peasenet.main.Settings
+import com.peasenet.config.TracerConfig
 import net.minecraft.client.MinecraftClient
 import net.minecraft.entity.mob.MobEntity
 
@@ -57,14 +59,21 @@ class ModMobTracer : TracerMod(
         val playerPos = er.playerPos
         if (entity !is MobEntity) return
         val color =
-            if (er.entityType.spawnGroup.isPeaceful) tracerConfig.peacefulMobColor else tracerConfig.hostileMobColor
-        if (tracerConfig.mobIsShown(entity.type))
+            if (er.entityType.spawnGroup.isPeaceful) config.peacefulMobColor else config.hostileMobColor
+        if (config.mobIsShown(entity.type))
             RenderUtils.renderSingleLine(
-                stack, buffer!!, playerPos!!, center!!, color, tracerConfig.alpha
+                stack, buffer!!, playerPos!!, center!!, color, config.alpha
             )
     }
 
 
     override fun onRenderBlockEntity(er: BlockEntityRender) {
+    }
+
+    companion object {
+        val config: TracerConfig 
+        get() {
+            return Settings.getConfig<TracerConfig>("tracer")
+        }
     }
 }
